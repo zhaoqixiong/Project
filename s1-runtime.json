@@ -1,0 +1,68 @@
+{
+  "target": "bmv2",
+  "p4info": "build/basic.p4info",
+  "bmv2_json": "build/basic.json",
+  "table_entries": [
+    {
+      "table": "MyIngress.feature3",
+      "default_action": true,
+      "action_name": "MyIngress.drop",
+      "action_params": { }
+    },
+    {
+      "table": "MyIngress.feature3",
+      "match": {
+        "hdr.ipv4.protocol": 6
+      },
+      "action_name": "MyIngress.set_actionselect",
+      "action_params": {
+        "featurevalue": 1
+
+      }
+    },
+    {
+      "table": "MyIngress.feature3",
+      "match": {
+        "hdr.ipv4.protocol": 1
+      },
+      "action_name": "MyIngress.set_actionselect",
+      "action_params": {
+       "featurevalue": 0
+      }
+    },
+    
+  ]
+  
+  
+  
+  "table_entries": [
+      {
+          "table": "MyIngress.match",
+          "default_action": true,
+          "action_name": "MyIngress.drop",
+          "action_params": { }
+      },
+      {
+          "table": "MyIngress.match",
+          "match": {
+              "meta.action_select": 1
+          },
+          "action_name": "MyIngress.ipv4_forward",
+          "action_params": {
+              "dstAddr": "00:00:00:02:02:00",
+              "port": 2
+        }
+      },
+      
+      
+      {
+          "table": "MyIngress.match",
+          "match": {
+              "meta.action_select": 0
+          },
+          "action_name": "MyIngress.drop",
+          "action_params": {}
+      },
+      
+  ]
+}
